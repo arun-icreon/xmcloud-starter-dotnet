@@ -1,4 +1,4 @@
-# XM Cloud ASP.NET Core Starter Kit
+## XM Cloud ASP.NET Core Starter Kit
 This repository contains the ASP.NET Core Starter Kit for Sitecore XM Cloud Development. It is intended to get developers up and running quickly with a new ASP.NET Core project that is integrated with Sitecore XM Cloud.
 
 ## Pre-release & Known Issues
