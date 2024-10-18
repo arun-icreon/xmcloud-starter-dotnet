@@ -2,7 +2,7 @@ using Microsoft.AspNetCore.Localization;
 using Sitecore.AspNetCore.Starter.Extensions;
 using System.Globalization;
 
-var MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
+var MyAllowSpecificOrigins = "pageeditor";
 
 WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 
@@ -11,13 +11,12 @@ ArgumentNullException.ThrowIfNull(sitecoreSettings);
 
 builder.Services.AddCors(options =>
 {
-    options.AddPolicy(name: MyAllowSpecificOrigins,
-                      policy =>
-                      {
-                          policy.AllowAnyOrigin()
-                          .AllowAnyHeader()
-                          .AllowAnyMethod();
-                      });
+    options.AddPolicy(name: MyAllowSpecificOrigins, configurePolicy: policy =>
+    {
+        policy.WithOrigins("https://pages.sitecorecloud.io");
+        policy.AllowAnyHeader();
+        policy.AllowAnyMethod();
+    });
 });
 
 builder.Services.AddRouting()
@@ -56,7 +55,7 @@ if (sitecoreSettings.EnableEditingMode)
 app.UseRouting();
 app.UseStaticFiles();
 
-app.UseCors(MyAllowSpecificOrigins);
+
 
 const string defaultLanguage = "en";
 app.UseRequestLocalization(options =>
@@ -77,5 +76,7 @@ app.MapControllerRoute(
 
 app.MapSitecoreLocalizedRoute("sitecore", "Index", "Default");
 app.MapFallbackToController("Index", "Default");
+
+app.UseCors(MyAllowSpecificOrigins);
 
 app.Run();
