@@ -19,7 +19,8 @@ public static class ServiceCollectionExtensions
                               .AddModelBoundView<LinkList>("LinkList")
                               .AddModelBoundView<Image>("Image")
                               .AddModelBoundView<PartialDesignDynamicPlaceholder>("PartialDesignDynamicPlaceholder")
-                              .AddModelBoundView<Navigation>("Navigation");
+                              .AddModelBoundView<Navigation>("Navigation")
+                              .AddModelBoundView<HeroComponent>("~/Views/HeroComponent/HeroComponent.cshtml");
 
         return renderingEngineOptions;
     }
